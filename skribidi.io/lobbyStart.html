@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.7.1.min.js">
+
+    </script>
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 50px;
+            margin: 4px 2px;
+            transition-duration: .8s;
+            cursor: pointer;
+            top:50%;
+
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 5px solid #04AA6D;
+            transform: translateY(330%);
+
+        }
+
+        .button1:hover {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 5px solid #008CBA;
+            top:50%;
+            transform: translateY(350%);
+        }
+
+        .button2:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+        .password {
+            background-color: white;
+            color: darkgreen;
+            border: 2px solid #04AA6D;
+            top:50%;
+            transform: translateY(1600%);
+        }
+
+    </style>
+</head>
+<body>
+
+
+<script type="text/javascript">
+
+
+    alert("Welcome,Player");
+</script>
+
+<center>
+    <input id="requestButton" type="button" value="Create" class="button button1" onclick= requestClicked()>
+    <center>
+        <input type="text" class ="password" id = "password" placeholder="enter password">
+        <center>
+            <input id="requestButton2" type="button" value="Join" class="button button2" onclick= requestClicked2()>
+
+            <script>
+                function requestClicked(){
+                    location.href = './create';
+                    return false;
+                }
+
+                function requestClicked2(){
+                    location.href = './join';
+                    return false;
+                }
+
+                $(document).ready(function(){
+
+                });
+            </script>
+</body>
+</html>
+

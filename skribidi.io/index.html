@@ -1,0 +1,520 @@
+<!-- Group 1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Chewy' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing Canvas</title>
+    <style>
+
+        canvas{
+            border: 1px solid black;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor:crosshair;
+        }
+
+        /* CSS */
+        .fill {
+            align-items: center;
+            appearance: none;
+            background-color: #fff;
+            border-radius: 24px;
+            border-style: none;
+            box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0
+            6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+            box-sizing: border-box;
+            color: #3c4043;
+            cursor: pointer;
+            display: inline-flex;
+            fill: currentcolor;
+            font-family: "Google Sans",Roboto,Arial,sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            height: 48px;
+            justify-content: center;
+            letter-spacing: .25px;
+            line-height: normal;
+            max-width: 100%;
+            overflow: visible;
+            padding: 2px 24px;
+            position: relative;
+            text-align: center;
+            text-transform: none;
+            transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms
+            linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            width: auto;
+            will-change: transform,opacity;
+            z-index: 0;
+        }
+        .fill:hover {
+            background: #F6F9FE;
+            color: #174ea6;
+        }
+        .fill:active {
+            box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60
+            64 67 / 15%);
+            outline: none;
+        }
+        .fill:focus {
+            outline: none;
+            border: 2px solid #4285f4;
+        }
+        .fill:not(:disabled) {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15)
+            0 4px 8px 3px;
+        }
+        .fill:not(:disabled):hover {
+            box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15)
+            0 6px 10px 4px;
+        }
+        .fill:not(:disabled):focus {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15)
+            0 4px 8px 3px;
+        }
+        .fill:not(:disabled):active {
+            box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15)
+            0 8px 12px 6px;
+        }
+        .fill:disabled {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15)
+            0 4px 8px 3px;
+        }
+        .save {
+            align-items: center;
+            appearance: none;
+            background-color: #fff;
+            border-radius: 24px;
+            border-style: none;
+            box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0
+            6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+            box-sizing: border-box;
+            color: #3c4043;
+            cursor: pointer;
+            display: inline-flex;
+            fill: currentcolor;
+            font-family: "Google Sans",Roboto,Arial,sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            height: 48px;
+            justify-content: center;
+            letter-spacing: .25px;
+            line-height: normal;
+            max-width: 100%;
+            overflow: visible;
+            padding: 2px 24px;
+            position: relative;
+            text-align: center;
+            text-transform: none;
+            transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms
+            linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            width: auto;
+            will-change: transform,opacity;
+            z-index: 0;
+        }
+        .save:hover {
+            background: #F6F9FE;
+            color: #174ea6;
+        }
+        .save:active {
+            box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60
+            64 67 / 15%);
+            outline: none;
+        }
+        .save:focus {
+            outline: none;
+            border: 2px solid #4285f4;
+        }
+        .save:not(:disabled) {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15)
+            0 4px 8px 3px;
+        }
+        .save:not(:disabled):hover {
+            box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15)
+            0 6px 10px 4px;
+        }
+        .save:not(:disabled):focus {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15)
+            0 4px 8px 3px;
+        }
+        .save:not(:disabled):active {
+            box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15)
+            0 8px 12px 6px;
+        }
+        .save:disabled {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15)
+            0 4px 8px 3px;
+        }
+        .clear {
+            align-items: center;
+            appearance: none;
+            background-color: #fff;
+            border-radius: 24px;
+            border-style: none;
+            box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0
+            6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+            box-sizing: border-box;
+            color: #3c4043;
+            cursor: pointer;
+            display: inline-flex;
+            fill: currentcolor;
+            font-family: "Google Sans",Roboto,Arial,sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            height: 48px;
+            justify-content: center;
+            letter-spacing: .25px;
+            line-height: normal;
+            max-width: 100%;
+            overflow: visible;
+            padding: 2px 24px;
+            position: relative;
+            text-align: center;
+            text-transform: none;
+            transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms
+            linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            width: auto;
+            will-change: transform,opacity;
+            z-index: 0;
+        }
+        .clear:hover {
+            background: #F6F9FE;
+            color: #174ea6;
+        }
+        .clear:active {
+            box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60
+            64 67 / 15%);
+            outline: none;
+        }
+        .clear:focus {
+            outline: none;
+            border: 2px solid #4285f4;
+        }
+        .clear:not(:disabled) {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15)
+            0 4px 8px 3px;
+        }
+        .clear:not(:disabled):hover {
+            box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15)
+            0 6px 10px 4px;
+        }
+        .clear:not(:disabled):focus {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15)
+            0 4px 8px 3px;
+        }
+        .clear:not(:disabled):active {
+            box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15)
+            0 8px 12px 6px;
+        }
+        .clear:disabled {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15)
+            0 4px 8px 3px;
+        }
+        .eraser {
+            align-items: center;
+            appearance: none;
+            background-color: #fff;
+            border-radius: 24px;
+            border-style: none;
+            box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0
+            6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+            box-sizing: border-box;
+            color: #3c4043;
+            cursor: pointer;
+            display: inline-flex;
+            fill: currentcolor;
+            font-family: "Google Sans",Roboto,Arial,sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            height: 48px;
+            justify-content: center;
+            letter-spacing: .25px;
+            line-height: normal;
+            max-width: 100%;
+            overflow: visible;
+            padding: 2px 24px;
+            position: relative;
+            text-align: center;
+            text-transform: none;
+            transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms
+            linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            width: auto;
+            will-change: transform,opacity;
+            z-index: 0;
+        }
+        .eraser:hover {
+            background: #F6F9FE;
+            color: #174ea6;
+        }
+        .eraser:active {
+            box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60
+            64 67 / 15%);
+            outline: none;
+        }
+        .eraser:focus {
+            outline: none;
+            border: 2px solid #4285f4;
+        }
+        .eraser:not(:disabled) {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15)
+            0 4px 8px 3px;
+        }
+        .eraser:not(:disabled):hover {
+            box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15)
+            0 6px 10px 4px;
+        }
+        .eraser:not(:disabled):focus {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15)
+            0 4px 8px 3px;
+        }
+        .eraser:not(:disabled):active {
+            box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15)
+            0 8px 12px 6px;
+        }
+        .eraser:disabled {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15)
+            0 4px 8px 3px;
+        }
+        .title{
+            font-family: 'Chewy';
+            font-size: 88px;
+            transform: translateY(-50%);
+        }
+        .color {
+            position: absolute;
+            top: 68%;
+            right:78.5%;
+            transform: translateY(-50%);
+        }
+        .colorLabel {
+            position: absolute;
+            top: 65%;
+            right:77.5%;
+            transform: translateY(-50%);
+            font-family: 'Chewy';
+        }
+        .rangeLabel {
+            position: absolute;
+            float: left;
+            top: 60%;
+            right:76.5%;
+            transform: translateY(-50%);
+            font-family: 'Chewy';
+        }
+        .range {
+            position: absolute;
+            float: left;
+            top: 62%;
+            right:76%;
+            transform: translateY(-50%);
+        }
+        .eraser {
+            position: absolute;
+            float: left;
+            top: 53.5%;
+            right:77%;
+            transform: translateY(-50%);
+            font-family: 'Chewy';
+        }
+        .save {
+            position: absolute;
+            float: left;
+            top: 47%;
+            right:76%;
+            transform: translateY(-50%);
+            font-family: 'Chewy';
+        }
+        .clear {
+            position: absolute;
+            float: left;
+            top: 40%;
+            right:75.8%;
+            transform: translateY(-50%);
+            font-family: 'Chewy';
+        }
+        .fill {
+            position: absolute;
+            float: left;
+            top: 32.5%;
+            right:75.4%;
+            transform: translateY(-50%);
+            font-family: 'Chewy';
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src='/socket.io/socket.io.js'></script>
+</head>
+<body>
+<div>
+    <canvas id="canvas" width="900" height="550"></canvas>
+    <label for="colorPicker" class="colorLabel">Choose Color</label>
+    <input type="color" id="colorPicker" class="color">
+    <button id="fill" class="fill">Fill Background</button>
+    <button id="eraser" class="eraser">Eraser</button>
+    <div>
+        <label for="brushSize"  class="rangeLabel">Choose Brush Size</label>
+        <br>
+        <input type="range" id="brushSize" min="1" max="50" value="10" class="range">
+        <button id="clear" class="clear">Clear Canvas</button>
+        <br>
+        <button id="save" class="save">Save Image</button>
+        <!--<ul id='messages'></ul>-->
+        <center>
+            <h1 class="title">Skribidi.io</h1>
+        </center>
+        <script>
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            var w = window.innerWidth;
+            var h = window.innerHeight;
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+            let color = '#000000';
+            let brushSize = 10;
+            let lastServerX = 0;
+            let lastServerY = 0;
+            let serverOffX = 0;
+            let serverOffY = 0;
+            let serverColor = '#000000'
+
+            let ident;
+            let socket = io();
+            let str = document.cookie;
+            let strArr = str.split(";");
+            let lobbyNum = strArr[0];
+
+            if (document.cookie == ""){
+                lobbyNum = null;
+            }
+
+            function draw(e) {
+                if (!isDrawing) return;
+                // if (isDrawer) return; if not the drawer then return
+                context.strokeStyle = color;
+                context.lineWidth = brushSize;
+                context.lineCap = 'round';
+                context.lineJoin = 'round';
+                context.beginPath();
+                context.moveTo(lastX, lastY);
+                context.lineTo(e.offsetX, e.offsetY);
+                context.stroke();
+                socket.emit('updateCanvas', {x:lastX, y:lastY, offX:e.offsetX, offY:e.offsetY, color:color, size:brushSize, lobbyNumber:lobbyNum});
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+                console.log(lobbyNum)
+            }
+            canvas.addEventListener('mousedown', (e) => {
+                isDrawing = true;
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            });
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', () => isDrawing = false);
+            canvas.addEventListener('mouseout', () => isDrawing = false);
+            document.getElementById('colorPicker').addEventListener('input', (e) =>
+            color = e.target.value)
+            document.getElementById('eraser').addEventListener('click', () => color =
+            '#ffffff');
+            document.getElementById('fill').addEventListener('click', () => {
+                socket.emit('fillListen', {serverCol:color, lobbyNumber:lobbyNum});
+                context.fillStyle = color;
+                context.fillRect(0, 0, canvas.width, canvas.height);
+            });
+            document.getElementById('brushSize').addEventListener('input', (e) =>
+            brushSize = e.target.value);
+            document.getElementById('clear').addEventListener('click', () => {
+                socket.emit('clearListen', {lobbyNumber:lobbyNum});
+                context.clearRect(0, 0, canvas.width, canvas.height);
+            });
+            document.getElementById('save').addEventListener('click', () => {
+                const image = canvas.toDataURL('image/png').replace('image/png','image/octet-stream');
+                const a = document.createElement('a');
+                a.href = image;
+                a.download = 'canvas.png';
+                a.click();
+            });
+            ///////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////
+
+            //Get message from server.
+            socket.on('welcome', function(data) {
+                ident = data.id;
+                $("#messages").append('<li>' + data.message + " " + data.id + '</li>');
+                if(data.Name != "" && data.Comment != "")
+                {
+                    $("#messages").append('<li>' + data.Name + ": " + data.Comment +
+                    '</li>')
+                }
+                socket.emit('getLobbyNum', {lobbyNumber:lobbyNum})
+            });
+            //Get message from server.
+            socket.on('update', (data) => {
+                $("#messages").append('<li>' + data.Name + ": " + data.Comment +
+                '</li>');
+            });
+            socket.on('updateCanvas', (data) => {
+                lastServerX = data.x;
+                lastServerY = data.y;
+                serverOffX = data.offX;
+                serverOffY = data.offY;
+                //////
+                context.strokeStyle = data.color;
+                context.lineWidth = data.size;
+                context.lineCap = 'round';
+                context.lineJoin = 'round';
+                context.beginPath();
+                context.moveTo(lastServerX, lastServerY);
+                context.lineTo(serverOffX, serverOffY);
+                context.stroke();
+                console.log("WOW")
+            });
+            socket.on('clearListen', () => {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+            });
+            socket.on('fillListen', (data) => {
+                context.fillStyle = data.serverColor;
+                context.fillRect(0, 0, canvas.width, canvas.height);
+            });
+
+
+            function doit() {
+                //Send message to server.
+                socket.emit('update', {'Comment':
+                $("#comment").val(),'Name':$("#name").val()});
+                return false;
+            }
+            $(document).ready(function(){
+                $("#name").keydown( function( event ) {
+                    if ( event.which === 13 ) {
+                        doit();
+                        event.preventDefault();
+                        return false;
+                    }
+                });
+                $("#comment").keydown( function( event ) {
+                    if ( event.which === 13 ) {
+                        doit();
+                        event.preventDefault();
+                        $("#comment").val("")
+                        return false;
+                    }
+                });
+            });
+
+        </script>
+</html>
+
+

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href='https://fonts.googleapis.com/css?family=Chewy' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src='/socket.io/socket.io.js'></script>
+  <title>Drawing Canvas</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+    canvas {
+      border: 1px solid black;
+      height: 200px;
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .center {
+      position: absolute;
+      top: 90%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .messages {
+      position: absolute;
+      top: 20%;
+      left: 72%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color:black;font-size:30px
+    }
+    .box {
+      position: absolute;
+      width: 200px;
+      height: 500px;
+      border: 5px solid black;
+      padding: 10px;
+      margin: 10px;
+      top: 35%;
+      left: 75%;
+      transform: translate(-50%, -50%);
+    }
+    .title{
+      font-family: 'Chewy';
+      font-size: 88px;
+      transform: translateY(-50%);
+    }
+    .button{
+      font-family: 'Chewy';
+      font-size: 20px;
+      transform: translateY(-35%);
+    }
+    .comment{
+      font-family: 'Chewy';
+      font-size: 20px;
+      transform: translateY(-35%);
+    }
+    .msgg{
+      font-family: 'Chewy';
+      font-size: 15px;
+      transform: translateY(-35%);
+    }
+
+
+  </style>
+  <center>
+    <h1 class="title">Skribidi.io</h1>
+  </center>
+</head>
+<body>
+<canvas id="canvas" width="window.innerWidth/2" height="window.outerHeight/2"></canvas>
+<div class="box">
+</div>
+
+
+<div class ="messages">
+  <ul id='messages'></ul>
+</div>
+
+
+
+<div class="center">
+  <form  class="form-container">
+    <label class="comment"> <h1>Chat</h1> </label>
+    <label class= "comment"for="msg"><b>Comment</b></label>
+    <textarea class="msg"placeholder="Type message.."required></textarea>
+    <button type="submit" class="button">Send</button>
+  </form>
+</div>
+
+<script>
+
+
+  $(document).ready(function(){
+    const form = $('.form-container');
+    const messagesList = $('#messages');
+
+    form.submit(function(event) {
+      event.preventDefault();
+      const comment = $('textarea').val();
+      messagesList.append('<li>' + comment + '</li>');
+      $('textarea').val('');
+    });
+  });
+</script>
+</html>
+
